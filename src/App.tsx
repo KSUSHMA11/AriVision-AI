@@ -10,6 +10,7 @@ import ResultsPage from "./pages/ResultsPage";
 import HistoryPage from "./pages/HistoryPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -3,13 +3,15 @@ import { motion } from "framer-motion";
 import { Camera, Upload, Clock, BarChart3 } from "lucide-react";
 import TopBar from "@/components/TopBar";
 import BottomNav from "@/components/BottomNav";
+import FallingLeaves from "@/components/FallingLeaves";
 
 const Dashboard = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-background pb-20">
+    <div className="flex min-h-screen flex-col bg-background pb-20 relative">
+      <FallingLeaves />
       <TopBar />
 
-      <main className="flex-1 px-4 py-6">
+      <main className="flex-1 px-4 py-6 relative z-10">
         {/* Greeting */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -99,7 +101,7 @@ const Dashboard = () => {
       </main>
 
       {/* Large scan CTA at bottom */}
-      <div className="fixed bottom-16 left-0 right-0 px-4 pb-2">
+      <div className="fixed bottom-16 left-0 right-0 px-4 pb-2 z-10">
         <Link to="/scan">
           <motion.div
             className="capture-zone flex items-center justify-center gap-2 rounded-full border border-primary/20 py-4 text-center"

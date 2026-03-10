@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button";
 import TopBar from "@/components/TopBar";
 import BottomNav from "@/components/BottomNav";
 import ScanAnimation from "@/components/ScanAnimation";
+import FallingLeaves from "@/components/FallingLeaves";
+import CameraCapture from "@/components/CameraCapture";
 import { getRandomDiagnosis } from "@/lib/mockDiagnosis";
 
 const ScanPage = () => {
   const [image, setImage] = useState<string | null>(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -33,11 +36,12 @@ const ScanPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background pb-20">
+    <div className="flex min-h-screen flex-col bg-background pb-20 relative">
+      <FallingLeaves />
       <TopBar />
       <ScanAnimation isScanning={isScanning} imageSrc={image} onComplete={onScanComplete} />
 
-      <main className="flex-1 px-4 py-6">
+      <main className="flex-1 px-4 py-6 relative z-10">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <h1 className="font-display text-2xl font-bold mb-1">Scan Leaf</h1>
           <p className="text-sm text-muted-foreground mb-6">Capture or upload a leaf image for diagnosis</p>
@@ -46,7 +50,7 @@ const ScanPage = () => {
             <div className="space-y-3">
               {/* Camera capture */}
               <button
-                onClick={() => cameraRef.current?.click()}
+                onClick={() => setIsCameraOpen(true)}
                 className="flex w-full items-center gap-4 rounded-lg bg-primary p-5 text-primary-foreground transition-transform active:scale-[0.98]"
               >
                 <Camera className="h-6 w-6" />
@@ -55,14 +59,6 @@ const ScanPage = () => {
                   <p className="text-xs opacity-80">Use device camera</p>
                 </div>
               </button>
-              <input
-                ref={cameraRef}
-                type="file"
-                accept="image/*"
-                capture="environment"
-                className="hidden"
-                onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
-              />
 
               {/* File upload */}
               <button
@@ -120,6 +116,15 @@ const ScanPage = () => {
       </main>
 
       <BottomNav />
+      {isCameraOpen && (
+        <CameraCapture
+          onCapture={(imageSrc) => {
+            setImage(imageSrc);
+            setIsCameraOpen(false);
+          }}
+          onClose={() => setIsCameraOpen(false)}
+        />
+      )}
     </div>
   );
 };
