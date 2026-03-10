@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AriVision AI - Plant Pathology Diagnostic Lab
 
 This project is a clinical-grade plant disease detection web application using modern deep learning concepts like Vision Transformers (ViT) and Swin Transformers.
@@ -32,3 +33,6 @@ This project is a clinical-grade plant disease detection web application using m
 - `src/components`: UI components, animations, and navigation.
 - `src/pages`: Main application screens (Dashboard, Scan, Results, etc.).
 - `src/lib`: Utilities and mocked diagnosis engine.
+=======
+# AriVision-AI
+>>>>>>> cb69b8cca0462b085cd57afba50d8f86e2402ca3
